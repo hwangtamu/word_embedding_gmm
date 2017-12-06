@@ -1,9 +1,9 @@
 import re
 
-path = 'wiki_'
+path = 'data/wiki_'
 
 
-for ii in range(48,49):
+for ii in range(0, 1):
     t = []
 
     n = str(ii) if ii > 9 else '0'+str(ii)

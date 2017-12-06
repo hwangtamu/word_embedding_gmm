@@ -49,8 +49,9 @@ class Predictor:
         a = self.get_clusters(w, context)
         tmp = []
         for i in a:
-            t = self.model.mus_n[2*self.model.word2id[i[0]]+i[1]]
-            tmp += [t]
+            if i[1]>=0:
+                t = self.model.mus_n[2*self.model.word2id[i[0]]+i[1]]
+                tmp += [t]
         b = np.sum(tmp, axis=0)
         c = np.linalg.norm(b)
         return b/c
