@@ -20,7 +20,11 @@ with open(p, 'r') as f:
                 a+=[tmp]
             tmp = []
         if not bool(re.search(r'<.+>', i)):
-            tmp += re.findall(r'[A-Za-z]+', i.strip().lower())
+            if tmp == []:
+                tmp+=['']
+            else:
+                tmp += re.findall(r'[A-Za-z]+', i.strip().lower())
+
 
 out = []
 for i in a:
