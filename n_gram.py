@@ -49,5 +49,20 @@ class Predictor:
         a = self.get_clusters(w, context)
         tmp = []
         for i in a:
-            tmp += []
+            t = self.model.mus_n[2*self.model.word2id[i[0]]+i[1]]
+            tmp += [t]
+        b = np.sum(tmp, axis=0)
+        c = np.linalg.norm(b)
+        return b/c
+
+    def get_similar_words(self, w, context):
+        a = self.get_centroid(w, context)
+        dist = np.dot(self.model.mus_n, a)
+        highsim_idxs = dist.argsort()[::-1]
+        highsim_idxs = highsim_idxs[:20]
+        dist_val = dist[highsim_idxs]
+        words = self.model.idxs2words(highsim_idxs)
+        return [(words[x], dist_val[x]) for x in range(20)]
+
+
 
